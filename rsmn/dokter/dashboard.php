@@ -107,21 +107,7 @@
                 <p>Ini adalah halaman awal setelah anda berhasil login.</p>
 
                 <div class="row my-4">
-                    <div class="col-12 col-md-6 col-lg-5 mb-4 mb-lg-0">
-                        <div class="card">
-                            <h5 class="card-header"><?php echo($_SESSION['username']) ?></h5>
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="../assets/upload/imgDokter/<?php echo($_SESSION['foto']) ?>" class="img-fluid rounded-start img-dsh" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $name; ?></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
                         <h5><?php echo date('l, d / m / Y'); ?></h5>
                         <p class="card-text"><b><span id="jam" style="font-size:24"></span> WIB</b></p>
