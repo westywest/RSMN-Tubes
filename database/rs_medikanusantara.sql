@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 08:22 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jan 15, 2024 at 02:39 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,22 +26,69 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `admin`
 --
-CREATE DATABASE rs_medikanusantara;
-USE rs_medikanusantara;
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `updationDate` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `updationDate`) VALUES
-(1, 'admin', 'Test@12345', '06-11-2023 11:42:05 ');
+(1, 'admin', 'admin123', '06-11-2023 11:42:05 ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dokter`
+--
+
+CREATE TABLE `dokter` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `full_name` varchar(150) NOT NULL,
+  `foto` text NOT NULL,
+  `spesialis` varchar(100) NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `address` longtext NOT NULL,
+  `city` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dokter`
+--
+
+INSERT INTO `dokter` (`id`, `username`, `password`, `full_name`, `foto`, `spesialis`, `gender`, `email`, `address`, `city`) VALUES
+(1, 'supriyanto', 'supri', 'Supriyanto', '', 'Anak', '', '', '', ''),
+(16, 'dhian', 'd123', 'dr. Dhian Endrawati, Sp.A', '65a481a895b8c.jpg', 'Anak', 'Female', 'dhianyy@gmail.com', 'jebres', 'solo');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `registrasipasien`
+--
+
+CREATE TABLE `registrasipasien` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `full_name` varchar(150) NOT NULL,
+  `spesialis` varchar(100) NOT NULL,
+  `keluhan` longtext NOT NULL,
+  `time_register` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `registrasipasien`
+--
+
+INSERT INTO `registrasipasien` (`id`, `user_id`, `full_name`, `spesialis`, `keluhan`, `time_register`) VALUES
+(1, 0, 'Maharani Dian', '', '', '2024-01-15');
 
 -- --------------------------------------------------------
 
@@ -59,14 +106,16 @@ CREATE TABLE `tblcontactus` (
   `AdminRemark` mediumtext DEFAULT NULL,
   `LastupdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `IsRead` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblcontactus`
 --
 
 INSERT INTO `tblcontactus` (`id`, `fullname`, `email`, `contactno`, `message`, `PostingDate`, `AdminRemark`, `LastupdationDate`, `IsRead`) VALUES
-(3, 'kelpin', 'kelpin@gmail.com', 1234, '08232', '2023-11-08 07:57:21', NULL, NULL, NULL);
+(3, 'kelpin', 'kelpin@gmail.com', 1234, '08232', '2023-11-08 07:57:21', NULL, NULL, NULL),
+(4, 'wewa', 'asads', 0, 'sadasd', '2024-01-10 14:27:12', NULL, NULL, NULL),
+(5, 'wes', 'asklo@gmail.com', 8787878787, 'aaaadsdsdsds', '2024-01-14 15:44:07', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83,7 +132,7 @@ CREATE TABLE `tblpage` (
   `MobileNumber` bigint(10) DEFAULT NULL,
   `UpdationDate` timestamp NULL DEFAULT current_timestamp(),
   `OpenningTime` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblpage`
@@ -107,7 +156,7 @@ CREATE TABLE `userlog` (
   `loginTime` timestamp NULL DEFAULT current_timestamp(),
   `logout` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -117,22 +166,24 @@ CREATE TABLE `userlog` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `fullName` varchar(20) DEFAULT NULL,
+  `username` varchar(50) NOT NULL,
+  `full_name` varchar(20) DEFAULT NULL,
   `address` longtext DEFAULT NULL,
   `city` varchar(30) DEFAULT NULL,
-  `gender` varchar(5) DEFAULT NULL,
-  `email` varchar(20) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `regDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fullName`, `address`, `city`, `gender`, `email`, `password`, `regDate`, `updationDate`) VALUES
-(1, 'jejenmadoka', 'Purwokerto Selatan Banyumas', 'purwokerto', 'male', 'jejen@test.com', 'f925916e2754e5e03f75dd58a5733251', '2023-11-07 12:13:56', NULL);
+INSERT INTO `users` (`id`, `username`, `full_name`, `address`, `city`, `gender`, `email`, `password`, `regDate`, `updationDate`) VALUES
+(3, 'wewe', 'westy', 'purwokerto', 'purwokerto', 'Perem', 'dianm1@gmail.com', '12345', '2024-01-14 16:07:50', NULL),
+(4, 'maharani', 'Maharani Dian', 'karangpucung', 'Purwokerto', 'Femal', 'dianmaharanidi17@gma', '12345', '2024-01-14 17:49:39', NULL);
 
 --
 -- Indexes for dumped tables
@@ -143,6 +194,19 @@ INSERT INTO `users` (`id`, `fullName`, `address`, `city`, `gender`, `email`, `pa
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dokter`
+--
+ALTER TABLE `dokter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `registrasipasien`
+--
+ALTER TABLE `registrasipasien`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `tblcontactus`
@@ -180,10 +244,22 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `dokter`
+--
+ALTER TABLE `dokter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `registrasipasien`
+--
+ALTER TABLE `registrasipasien`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tblcontactus`
 --
 ALTER TABLE `tblcontactus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblpage`
@@ -201,7 +277,7 @@ ALTER TABLE `userlog`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
