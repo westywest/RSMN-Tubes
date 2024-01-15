@@ -45,7 +45,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/RSMN/rsmn/pasien/pendaftaran.php" class="nav-link link-dark">
+                        <a href="#" class="nav-link link-dark">
                             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                             Dokter
                         </a>
