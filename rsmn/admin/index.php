@@ -103,7 +103,7 @@
 
 			</div>
 			<div class="text-center margin-top-20">
-    			<a href="../index.php" class="btn btn-default"><i class="fa fa-home"></i> Kembali ke Menu Awal</a>
+    			<a href="../../index.php" class="btn btn-default"><i class="fa fa-home"></i> Kembali ke Menu Awal</a>
 			</div>
 		</div>
 		<script src="vendor/jquery/jquery.min.js"></script>
